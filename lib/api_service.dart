@@ -42,4 +42,14 @@ class ApiService {
       throw "Falha ao listar";
     }
   }
+
+  Future<http.Response> deletaContato(int id) async {
+    http.Response response = await http.delete(
+      Uri.parse('$urlRequest/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+    return response;
+  }
 }

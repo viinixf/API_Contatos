@@ -1,4 +1,4 @@
-import 'package:apicontatosfront/lista_de_clientes_tela_inicial.dart';
+import 'package:apicontatosfront/lista_de_contatos.dart';
 import 'package:apicontatosfront/tela_de_cadastro.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,7 @@ class _TelaInicialState extends State<TelaInicial> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(10.0),
                 ),
                 TextFormField(
                   decoration: const InputDecoration(

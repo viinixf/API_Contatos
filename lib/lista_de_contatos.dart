@@ -37,6 +37,19 @@ class _ListaDeContatosTelaInicialState
 
                 return ListTile(
                   title: Text(dadosContatoCadastrados.nomeDoContato!),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      apiService.deletaContato(dadosContatoCadastrados.id!);
+                      const snackBarDelete = SnackBar(
+                        duration: Duration(seconds: 2),
+                        content: Text('Contato removido!'),
+                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(snackBarDelete);
+                      setState(() {});
+                    },
+                  ),
                 );
               },
             );
