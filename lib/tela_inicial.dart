@@ -15,15 +15,15 @@ class _TelaInicialState extends State<TelaInicial> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Lista de contatos"),
-        actions: <Widget>[
+        title: const Text("Gerenciador de contatos"),
+        actions: [
           IconButton(
             icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TelaDeCadastro()));
+                  MaterialPageRoute(builder: ((context) => TelaDeCadastro())));
             },
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -33,7 +33,7 @@ class _TelaInicialState extends State<TelaInicial> {
             child: Column(
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(09.0),
+                  padding: EdgeInsets.all(20.0),
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
@@ -59,7 +59,23 @@ class _TelaInicialState extends State<TelaInicial> {
                   height: 20,
                   thickness: 3,
                 ),
-                const ListaDeClientesTelaInicial(),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>
+                                    const ListaDeContatosTelaInicial())));
+                      },
+                      child: const Text('Lista de contatos'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

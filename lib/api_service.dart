@@ -8,12 +8,18 @@ class ApiService {
 
   //Método responsável por inserir contatos (MÉTODO POST)
   Future<Contato> postContato(Contato contato) async {
+    Map dadosDoContado = {
+      'nomeDoContato': contato.nomeDoContato,
+      'telefoneDoContato': contato.telefoneDoContato,
+      'idadeDoContato': contato.idadeDoContato,
+      'sexoDoContato': contato.sexoDoContato
+    };
     http.Response response;
     try {
       response = await http.post(
         urlRequest,
         headers: {"Content-type": "application/json"},
-        body: contato.toJson(),
+        body: jsonEncode(dadosDoContado),
       );
       if (response.statusCode > 300 && response.statusCode <= 500) {
         throw Exception('Erro ao cadastrar!');
@@ -29,9 +35,9 @@ class ApiService {
     http.Response response = await http.get(urlRequest);
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
-      List<Contato> contato =
-          body.map((dynamic item) => Contato.fromJson(item)).toList();
-      return contato;
+      List<Contato> contatos =
+          body.map((contato) => Contato.fromJson(contato)).toList();
+      return contatos;
     } else {
       throw "Falha ao listar";
     }

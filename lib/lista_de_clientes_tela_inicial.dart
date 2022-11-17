@@ -2,37 +2,45 @@ import 'package:apicontatosfront/api_service.dart';
 import 'package:apicontatosfront/contato.dart';
 import 'package:flutter/material.dart';
 
-class ListaDeClientesTelaInicial extends StatefulWidget {
-  const ListaDeClientesTelaInicial({super.key});
+class ListaDeContatosTelaInicial extends StatefulWidget {
+  const ListaDeContatosTelaInicial({super.key});
 
   @override
-  State<ListaDeClientesTelaInicial> createState() =>
-      _ListaDeClientesTelaInicialState();
+  State<ListaDeContatosTelaInicial> createState() =>
+      _ListaDeContatosTelaInicialState();
 }
 
-class _ListaDeClientesTelaInicialState
-    extends State<ListaDeClientesTelaInicial> {
+class _ListaDeContatosTelaInicialState
+    extends State<ListaDeContatosTelaInicial> {
   ApiService apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () async {},
-      child: FutureBuilder<List<Contato>>(
-        future: apiService.getContato(),
-        builder: (context, snapshot) {
-          final contatoCriado = Contato();
-          if (contatoCriado.id == null) {
-            return const Center(
-              child: Text('Nenhum contato adicionado'),
-            );
-          }
-          return ListTile(
-            title: Text(contatoCriado.nomeDoContato!),
-            subtitle: Text(contatoCriado.sexoDoContato!),
-          );
-        },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Lista de contatos"),
       ),
+      body: FutureBuilder<List<Contato>>(
+          future: apiService.getContato(),
+          builder: (context, snapshot) {
+            final dadosContato = snapshot.data;
+            if (dadosContato == null) {
+              return const Center(
+                child: Text('Não há clientes cadastrados!'),
+              );
+            }
+
+            return ListView.builder(
+              itemCount: dadosContato.length,
+              itemBuilder: (context, index) {
+                final dadosContatoCadastrados = dadosContato[index];
+
+                return ListTile(
+                  title: Text(dadosContatoCadastrados.nomeDoContato!),
+                );
+              },
+            );
+          }),
     );
   }
 }

@@ -26,6 +26,7 @@ class TelaDeCadastro extends StatelessWidget {
             onPressed: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+
                 apiService.postContato(Contato(
                     nomeDoContato: nomeController.text,
                     telefoneDoContato: telefoneController.text,
@@ -119,7 +120,7 @@ class TelaDeCadastro extends StatelessWidget {
                     if (sexo == null ||
                         sexo.isEmpty ||
                         sexo != 'M' && sexo != 'F') {
-                      return 'Preencha o sexo do contato corretamente';
+                      return 'Preencha o sexo do contato corretamente: "M" ou "F"';
                     }
                     return null;
                   },
