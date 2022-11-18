@@ -23,17 +23,22 @@ class _ListaDeContatosTelaInicialState
       body: FutureBuilder<List<Contato>>(
           future: apiService.getContato(),
           builder: (context, snapshot) {
-            final dadosContato = snapshot.data;
-            if (dadosContato == null) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final contatosListados = snapshot.data;
+            if (contatosListados!.isEmpty) {
               return const Center(
                 child: Text('Não há clientes cadastrados!'),
               );
             }
 
             return ListView.builder(
-              itemCount: dadosContato.length,
+              itemCount: contatosListados.length,
               itemBuilder: (context, index) {
-                final dadosContatoCadastrados = dadosContato[index];
+                final dadosContatoCadastrados = contatosListados[index];
 
                 return ListTile(
                   title: Text(dadosContatoCadastrados.nomeDoContato!),
