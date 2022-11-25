@@ -4,13 +4,16 @@ import 'package:apicontatosfront/tela_inicial.dart';
 import 'package:flutter/material.dart';
 
 class TelaDeCadastro extends StatelessWidget {
+  // A GlobalKey serve para identificar de forma exclusiva o formulário e permite validar as informações
   final _formKey = GlobalKey<FormState>();
+
   final apiService = ApiService();
 
   TelaDeCadastro({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Criação das variáveis de Controller que irão receber o conteúdo digitado no TextFormField
     var nomeController = TextEditingController(text: '');
     var telefoneController = TextEditingController(text: '');
     var idadeController = TextEditingController(text: '');
@@ -21,22 +24,26 @@ class TelaDeCadastro extends StatelessWidget {
         centerTitle: true,
         title: const Text("Cadastrar contato"),
         actions: [
+          ///////////////////////////////////////////////////////////////////
           IconButton(
             icon: const Icon(Icons.done),
             onPressed: () {
+              //Ao pressionar o IconButton Done, validará se a chave FormKey é valida e salvará
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-
+                //Sendo válida as informações, é chamado o método Post da ApiService e guardando as informações do Controller nos atributos da classe entidade
                 apiService.postContato(Contato(
                     nomeDoContato: nomeController.text,
                     telefoneDoContato: telefoneController.text,
                     idadeDoContato: int.parse(idadeController.text),
                     sexoDoContato: sexoController.text));
-
+                //Após guardar as informações, retorna para a TelaInicial
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                         builder: (context) => const TelaInicial()),
                     (route) => false);
+
+                //exibição do SnackBar correspondente com o que é executado no app
                 const snackBarCadastrado = SnackBar(
                     duration: Duration(seconds: 2),
                     content: Text(
@@ -56,10 +63,12 @@ class TelaDeCadastro extends StatelessWidget {
               }
             },
           ),
+          ////////////////////////////////////////////////////////////////
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
+        //Criada a Form pois é necessária para validar os campos (classe de formulário)
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -68,6 +77,7 @@ class TelaDeCadastro extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                 ),
+                //Validações utilizando o TextFormField
                 TextFormField(
                   controller: nomeController,
                   validator: (nome) {
