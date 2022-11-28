@@ -30,24 +30,32 @@ class ListaContatoPorNome extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
+              if (dadosDoContatoCadastrado!.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.all(50.0),
+                  child: Center(
+                    child: Text("Não há contatos com esse nome!"),
+                  ),
+                );
+              }
               //Após o envio da resposta da API, retorna uma Column com o ListViewBuilder
               return Column(
                 children: [
                   //Cria um Array linear rolável
                   ListView.builder(
                     //Quantidade de itens que retornará na Lista, caso altere para 3, por exemplo, serão listados somente três contatos
-                    itemCount: dadosDoContatoCadastrado?.length,
+                    itemCount: dadosDoContatoCadastrado.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       //Criação de variável que receberá os dadosDoContato já cadastrado
                       final listaDeDadosDoContato =
-                          dadosDoContatoCadastrado?[index];
+                          dadosDoContatoCadastrado[index];
                       //Retorna uma Column no qual exibirá os dados tratados do contato
                       return Column(
                         children: [
                           ListTile(
-                            title: Text(listaDeDadosDoContato!.nomeDoContato
-                                .toString()),
+                            title: Text(
+                                listaDeDadosDoContato.nomeDoContato.toString()),
                             subtitle: Text(
                                 "O telefone do contato é: ${listaDeDadosDoContato.telefoneDoContato}"),
                             trailing: const CircleAvatar(

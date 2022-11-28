@@ -92,7 +92,9 @@ class _TelaInicialState extends State<TelaInicial> {
                 //Lista de contatos já cadastrados
               ),
               const SingleChildScrollView(
-                child: Card(child: ListaDeContatosTelaInicial()),
+                child: Card(
+                  child: ListaDeContatosTelaInicial(),
+                ),
               )
             ],
           ),

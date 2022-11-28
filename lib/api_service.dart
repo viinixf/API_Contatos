@@ -10,6 +10,7 @@ class ApiService {
   Future<Contato> postContato(Contato contato) async {
     //Criando um objeto do tipo Map no qual recebe os dados do contato
     Map dadosDoContado = {
+      //Utilizado map pois é um objeto que é possível armazenar chave valor e inserir outros tipos de objetos
       // Passando os dados digitados no cadastrado para um Map dadosDoContado
       'nomeDoContato': contato.nomeDoContato,
       'telefoneDoContato': contato.telefoneDoContato,
@@ -65,6 +66,7 @@ class ApiService {
 
   ///Método responsável por listar contato por nome (GET por NOME)
   Future<List<Contato>> getPorNome(String nomeDoContato) async {
+    //Declaração da variável urlGetPorNome no qual o "nomeDoContato" é passado como parâmetro quando o método é invocado no código
     var urlGetPorNome = Uri.parse('$urlRequest/buscarPorNome/$nomeDoContato');
     //Indo na API e solicitando a lista de contatos com o nome passado
     //Dizendo para API: pega o que estiver dentro desta URL e espera até obter uma resposta, após isso guarde em response

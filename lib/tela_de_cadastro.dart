@@ -37,6 +37,7 @@ class TelaDeCadastro extends StatelessWidget {
                     telefoneDoContato: telefoneController.text,
                     idadeDoContato: int.parse(idadeController.text),
                     sexoDoContato: sexoController.text));
+
                 //Após guardar as informações, retorna para a TelaInicial
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
