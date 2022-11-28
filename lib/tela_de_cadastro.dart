@@ -27,12 +27,12 @@ class TelaDeCadastro extends StatelessWidget {
           ///////////////////////////////////////////////////////////////////
           IconButton(
             icon: const Icon(Icons.done),
-            onPressed: () {
+            onPressed: () async {
               //Ao pressionar o IconButton Done, validará se a chave FormKey é valida e salvará
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 //Sendo válida as informações, é chamado o método Post da ApiService e guardando as informações do Controller nos atributos da classe entidade
-                apiService.postContato(Contato(
+                await apiService.postContato(Contato(
                     nomeDoContato: nomeController.text,
                     telefoneDoContato: telefoneController.text,
                     idadeDoContato: int.parse(idadeController.text),
@@ -42,7 +42,6 @@ class TelaDeCadastro extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const TelaInicial()),
                     (route) => false);
-
                 //exibição do SnackBar correspondente com o que é executado no app
                 const snackBarCadastrado = SnackBar(
                     duration: Duration(seconds: 2),
