@@ -40,11 +40,12 @@ class ApiService {
   /// Criando uma lista do tipo contato (dizendo ao Flutter que o método retornará uma lista no futuro)
   Future<List<Contato>> getContato() async {
     //response aguarda um retorno da URLRequest e ficará aguardando até que seja enviado algo do localhost:8080/contato
+    //Neste trecho ocorre o Sleep da API no qual o APP aguarda até que sejam enviadas as respostas da requisição,
     http.Response response = await http.get(urlRequest);
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
       List<Contato> contatos =
-          body.map((contato) => Contato.fromJson(contato)).toList();
+          body.map((dynamic contato) => Contato.fromJson(contato)).toList();
       return contatos;
     } else {
       throw 'Falha na listagem';

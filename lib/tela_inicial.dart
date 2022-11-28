@@ -35,6 +35,7 @@ class _TelaInicialState extends State<TelaInicial> {
       ),
 
       // Criação do Body Column no qual distribui os Widgets verticalmente
+
       body: Column(
         children: <Widget>[
           const Padding(
@@ -51,6 +52,7 @@ class _TelaInicialState extends State<TelaInicial> {
             height: 60,
             child: TextButton(
               child: const Text('Pesquisar'),
+
               ///////////////////////////////////////////////////////////////////////////////////////
 
               //Se o buscaContatoController.text = vazio, retornará o SnackBar com duração de 4s informando que não há nada digitado
